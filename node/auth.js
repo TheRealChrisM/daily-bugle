@@ -88,12 +88,16 @@ app.post('/perms', async (request, response)=> {
     } catch(error) {
         response.send("AUTHENTICATION CHECK FAILURE")
     }
-    response.send({
-        "msg": "AUTHENTICATION CHECK SUCCESS",
-        "username": userInfo[0].username,
-        "accountType": userInfo[0].accountType
-    });
-    
+
+    if (userInfo.length == 1){
+        response.send({
+            "msg": "AUTHENTICATION CHECK SUCCESS",
+            "username": userInfo[0].username,
+            "accountType": userInfo[0].accountType
+        });
+    } else {
+        response.send("AUTHENTICATION CHECK FAILURE");
+    }
 });
 
 //DELETE: delete user
